@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Dashboard } from './pages/dashboard';
 import { Signin } from './pages/Signin';
 import { Signup } from './pages/Signup';
+import { ShareBrain } from './pages/ShareBrain';
 
 function App() {
   return ( <BrowserRouter>
@@ -13,6 +14,7 @@ function App() {
       <Route path='/dashboard' element={<Dashboard />}/>
 
       {/* Create route to access brain through shared link */}
+      <Route path='/share/:shareId' element={<ShareBrain/>}/>
     </Routes>
   
   </BrowserRouter>
