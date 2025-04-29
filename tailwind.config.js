@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         gray: {
+          50: "rgba(255,255,255,0.5)",
           200: "#f9fafb",   //Main div background
           500: "#90959f"    //text color(E.g. Added on 10/03/2024)
         },

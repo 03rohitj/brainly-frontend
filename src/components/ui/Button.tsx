@@ -20,15 +20,17 @@ interface ButtonProps{
     text: string;
     startIcon?: ReactElement; //For now we are giving any but it is worst practice, we will improve it later
     endIcon?: ReactElement;   //startIcon and endIcon should be optional, so we are using ? here
-    onClick: () => void;
+    onClick?: () => void;
+    fullWidth?: boolean;
+    loading?: boolean;
 }
 
 const defaultStyles = "rounded-md p-4 flex";
 
 const defaultIconStyles = "pr-1 pl-1 flex items-center justify-center";
 export const Button = (props: ButtonProps) => {
-    return <button className={`${variantStyles[props.variant]} ${defaultStyles}
-        ${sizeStyles[props.size]}`}>
+    return <button onClick={props.onClick} className={`${variantStyles[props.variant]} ${defaultStyles}
+        ${sizeStyles[props.size]} ${props.fullWidth ? " w-full flex justify-center" : ""} ${props.loading ? " opacity-50" : ""} `} disabled={props.loading}>
         {props.startIcon ? 
             <div className={defaultIconStyles}>{props.startIcon}</div> : null} 
         {props.text} 
