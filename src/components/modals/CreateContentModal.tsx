@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
-import { CrossIcon } from "../icons/CrossIcon";
-import { Button } from "./ui/Button";
-import { Input } from "./ui/Input";
+import { CrossIcon } from "../../icons/CrossIcon";
+import { Button } from "../ui/Button";
+import { Input } from "../ui/Input";
 import axios from "axios";
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from "../../config";
 
 enum ContentType{
     Youtube = "youtube",
@@ -36,6 +36,7 @@ export function CreateContentModal({open, onClose}) {
     return <div>
         {open && <div>
         
+            {/* To make modal full opaque and rest of screen 60% opaque */}
             <div className="w-screen h-screen bg-slate-500 fixed top-0 left-0 opacity-60 flex justify-center"> 
 
             </div>

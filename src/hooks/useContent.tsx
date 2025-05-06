@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../config";
 
-export function useContent(){
+export function useContent(showData){
     const [contents, setContents] = useState([]);
 
     function refresh(){
@@ -11,20 +11,28 @@ export function useContent(){
                 "Authorization": localStorage.getItem("token")
             }
         }).then((response) => {
-            setContents(response.data.Content);
+            let data;
+            console.log("ShowData : "+showData);
+            if(showData === "youtube")
+                data = response.data.Content.filter((item:any) => item.type === "youtube");
+            else if(showData === "twitter")
+                data = response.data.Content.filter((item:any) => item.type === "twitter");
+            else
+                data = response.data.Content
+            setContents(data);
         });
     }
     
-    useEffect(() => {
-         refresh();
-         let interval = setInterval(() => {
-            refresh();
-         }, 10 * 1000);
+    // useEffect(() => {
+    //      refresh();
+    //      let interval = setInterval(() => {
+    //         refresh();
+    //      }, 10 * 1000);
 
-         return () => {
-            clearInterval(interval);
-         }
-    }, []);
+    //      return () => {
+    //         clearInterval(interval);
+    //      }
+    // }, []);
 
-    return {contents, refresh};
+    return {contents, refresh, setContents};
 }
