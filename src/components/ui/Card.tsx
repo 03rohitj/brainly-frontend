@@ -4,6 +4,8 @@ import { iconContentType } from "../../icons"
 import { ArticleIcon } from "../../icons/ArticleIcon";
 import axios from "axios";
 import { BACKEND_URL } from "../../config";
+import { TwitterCard } from "./Cards/TwitterCard";
+import { YoutubeCard } from "./Cards/YoutubeCard";
 
 type CardType = "article" | "twitter" | "youtube";
 
@@ -60,11 +62,9 @@ export function Card ({title, link, type, id, reload} : CardProps) {
             </div>
 
             <div className="pt-4">
-                { type === "youtube" && <iframe className="w-full" src={link.replace("watch", "embed").replace("?v=", "/")} title={title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>}        {/*Link can be shared directly from url, so we need to replace watch with embed */}
+                { type === "youtube" && <YoutubeCard title={title} link={link}/>}       
 
-                { type === "twitter" && <blockquote className="twitter-tweet">
-                    <a href={link.replace("x.com", "twitter.com")}></a> 
-                </blockquote>}
+                { type === "twitter" && <TwitterCard link={link}/> }
             </div>
         </div>
     

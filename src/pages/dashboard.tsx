@@ -19,7 +19,7 @@ export function Dashboard() {
   const [verifyDeleteModalOpen, setVerifyDeleteModalOpen] = useState(false); //Used for verify delete modal
 
   const [showData, setShowData] = useState("all");    //which type of data to show? all, youtube or twitter
-  console.log("Dash ShowData : "+showData);
+  console.log("====Dash ShowData : "+showData);
   const {contents, refresh, setContents} = useContent(showData);
   const [ytData, setYTData] = useState(false);
   const [twitterData, setTwitterData] = useState(false);
@@ -67,7 +67,7 @@ export function Dashboard() {
         
       {/* Main Content */}
       <div className='flex gap-4 p-4 flex-wrap'> {/* Pass Content ID here, so that they could be deleted */}
-        {contents.map( ({link, type, title, _id}) => <Card type={type} link={link} title={title} id={_id} reload={refresh} />
+        {contents.map( ({link, type, title, _id}) => <Card key={_id} type={type} link={link} title={title} id={_id} reload={refresh} />
         )}
         
       </div>
