@@ -17,6 +17,8 @@ interface CardProps{
 
 export function Card ({title, link, type, id, reload} : CardProps) {
 
+    console.log("=====Card==",title,link,type,id)
+
     
     async function handleDelete(){
         const token = localStorage.getItem("token");
@@ -36,7 +38,7 @@ export function Card ({title, link, type, id, reload} : CardProps) {
     }
     
     const IconType = iconContentType[type] || ArticleIcon;
-    return <div>
+    return <div id={id}>
         <div className="p-4 bg-white rounded-md border border-gray-300 max-w-72 min-h-48">
             <div className="flex justify-between">
                 <div className="flex items-center">
@@ -67,8 +69,6 @@ export function Card ({title, link, type, id, reload} : CardProps) {
                 </blockquote>}
             </div>
         </div>
-    
-        
     </div>
 }
 

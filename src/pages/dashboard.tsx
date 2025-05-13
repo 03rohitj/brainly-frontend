@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // import './App.css';
 import { CreateContentModal } from '../components/modals/CreateContentModal';
 import { Button } from '../components/ui/Button';
@@ -18,20 +18,36 @@ export function Dashboard() {
   //To do later, confirm popup for deletion
   const [verifyDeleteModalOpen, setVerifyDeleteModalOpen] = useState(false); //Used for verify delete modal
 
-  const [showData, setShowData] = useState("all");    //which type of data to show? all, youtube or twitter
-  console.log("Dash ShowData : "+showData);
-  const {contents, refresh, setContents} = useContent(showData);
-  const [ytData, setYTData] = useState(false);
+     //which type of data to show? all, youtube or twitter
+  //console.log("Dash ShowData : "+showData);
+  const {contents, refresh, setContents} = useContent();
+
+   console.log("======= dashboard",contents)
+ 
   const [twitterData, setTwitterData] = useState(false);
+  const [yTibe,setYTData]=useState(false)
+  const [showData, setShowData] = useState<"all"|"twitter"|"youtube">("all");  
 
   //Load the contents when record is added or deleted
-  useEffect(() => {
+  // useEffect(() => {
+  //   refresh();
+  //   const twttr = (window as any).twttr;
+  //   if (twttr) {
+  //     twttr.widgets.load();
+  //   }
+  // }, [modalOpen, showData]);
+
+   useEffect(() => {
+
+    
+    
     refresh();
-    const twttr = (window as any).twttr;
-    if (twttr) {
-      twttr.widgets.load();
-    }
-  }, [modalOpen, showData]);
+
+    // const twttr = (window as any).twttr;
+    // if (twttr) {
+    //   twttr.widgets.load();
+    // }
+  }, []);
 
 
   return (<div className='flex bg-gray-100'>
@@ -39,7 +55,7 @@ export function Dashboard() {
       <Sidebar setShowData={setShowData} setYTData={setYTData} setTwitterData={setTwitterData} allData={contents}/>
       
       {/* Main Div */}
-      <div className='ml-72 w-screen min-h-screen '>
+      <div className='ml-72 w-screen min-h-screen'>
         <CreateContentModal open={modalOpen} onClose={() => {
           setModalOpen(false);
         }}/>
@@ -65,12 +81,12 @@ export function Dashboard() {
           }} />
       </div>
         
-      {/* Main Content */}
+     
+
       <div className='flex gap-4 p-4 flex-wrap'> {/* Pass Content ID here, so that they could be deleted */}
-        {contents.map( ({link, type, title, _id}) => <Card type={type} link={link} title={title} id={_id} reload={refresh} />
-        )}
-        
-      </div>
+           {contents[showData].map(({link, type, title, _id})=> <Card type={type} link={link} title={title} id={_id} reload={refresh} />)}
+        </div>
+      
         
 
         {/* ToDO VerifyDeleteModal is still pending */}

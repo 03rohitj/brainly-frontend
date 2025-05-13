@@ -13,7 +13,7 @@ interface SidebarProps{
 export function Sidebar(props: SidebarProps){
 
     function youtubeData(){
-        const ytData = props.allData.filter((item:any) => item.type === "youtube");
+        //const ytData = props.allData.filter((item:any) => item.type === "youtube");
         props.setYTData(true);
         props.setShowData("youtube");
         // alert("Youtube data selected : "+ JSON.stringify(ytData));
@@ -21,7 +21,7 @@ export function Sidebar(props: SidebarProps){
     }
 
     function twitterData(){
-        const twitterData = props.allData.filter((item:any) => item.type === "twitter");
+        //const twitterData = props.allData.filter((item:any) => item.type === "twitter");
         props.setTwitterData(true);
         props.setShowData("twitter");
         // alert("Twitter data selected : "+ JSON.stringify(twitterData));
